@@ -21,10 +21,7 @@ define (require, exports, module) ->
 
       compile = (path) ->
         alert 'compile #{path} ...'
-        @executeCoffee ['--cb', path]
-
-    executeCoffee: (args) ->
-      noderunner.run(PATH_TO_COFFEE, args, false)
+        noderunner.run(PATH_TO_COFFEE,  ['-cb', path], false)
 
     init: ->
       

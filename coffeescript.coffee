@@ -19,7 +19,7 @@ define (require, exports, module) ->
           compile(path)
 
       compile = (path) ->
-        alert 'compile #{ path } ...'
+        alert "compile #{path} ..."
 
     init: ->
       

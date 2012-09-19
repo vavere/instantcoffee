@@ -2,6 +2,7 @@ define (require, exports, module) ->
   
   ide = require 'core/ide'  
   ext = require 'core/ext'
+  noderunner = require 'ext/noderunner/noderunner'
 
   PATH_TO_COFFEE = 'node_modules/coffee-script/bin/coffee'
 
@@ -19,7 +20,11 @@ define (require, exports, module) ->
           compile(path)
 
       compile = (path) ->
-        alert "compile #{path} ..."
+        alert 'compile #{path} ...'
+        @executeCoffee ['--cb', path]
+
+    executeCoffee: (args) ->
+      noderunner.run(PATH_TO_COFFEE, args, false)
 
     init: ->
       

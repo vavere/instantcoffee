@@ -10,26 +10,25 @@ define (require, exports, module) ->
       dev: 'Lauris Vāvere'
       type: ext.GENERAL
       alone: yes
+      hook: ->
+        ide.addEventListener 'afterfilesave', (e) ->
+          node = e.node
+          path = node.getAttribute("path")
+          match = path.match(/.coffee$/)
+          if match
+            compile(path)
 
-    hook: ->
-      ide.addEventListener 'afterfilesave', (e) ->
-        node = e.node
-        path = node.getAttribute("path")
-        match = path.match(/.coffee$/)
-        if match
-          compile(path)
+        compile = (path) ->
+          console.log('compile #{path} ...')
 
-      compile = (path) ->
-        console.log('compile #{path} ...')
-
-    init: ->
-      
-    show: ->
-      
-    enable: ->
+      init: ->
         
-    disable: ->
+      show: ->
         
-    destroy: ->
+      enable: ->
+          
+      disable: ->
+          
+      destroy: ->
 
 

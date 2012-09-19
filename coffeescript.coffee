@@ -21,7 +21,6 @@ define (require, exports, module) ->
 
       compile = (path) ->
         realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
-        alert 'compile #{realPath} ...'
         noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
 
     init: ->

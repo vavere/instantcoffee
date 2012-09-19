@@ -1,0 +1,10 @@
+{
+  "author": "",
+  "name": "coffeescript",
+  "version": "0.0.1",
+  "main": "coffeescript.js",
+  "plugin": {
+    "provides": ["ext.coffeescript"],
+    "consumes": ["client-plugins"]
+  }
+}

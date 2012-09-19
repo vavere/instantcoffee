@@ -20,8 +20,9 @@ define (require, exports, module) ->
           compile(path)
 
       compile = (path) ->
-        alert 'compile #{path} ...'
-        noderunner.run(PATH_TO_COFFEE,  ['-cb', path], false)
+        realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
+        alert 'compile #{realPath} ...'
+        noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
 
     init: ->
       

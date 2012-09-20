@@ -19,9 +19,10 @@ define (require, exports, module) ->
 
   # cofffescript compile
   compile = (path) ->
-    fs.exists PATH_TO_COFFEE, (exists) ->
-      realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
-      noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
+    fs.exists ide.davPrefix + PATH_TO_COFFEE, (exists) ->
+      if exists
+        realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
+        noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
 
   # export cloud9 plugin 
   module.exports = ext.register 'ext/coffeescript/coffeescript',

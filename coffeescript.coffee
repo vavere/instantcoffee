@@ -3,36 +3,41 @@ define (require, exports, module) ->
   ide = require 'core/ide'  
   ext = require 'core/ext'
   noderunner = require 'ext/noderunner/noderunner'
+  fs = require "ext/filesystem/filesystem"
 
   PATH_TO_COFFEE = 'node_modules/coffee-script/bin/coffee'
 
+  # enable/disable control
   enabled = yes
-  compile = (path) ->
-    realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
-    noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
 
+  # event sink
+  afterFileSave = (e) ->
+    if enabled
+      path = e.node.getAttribute("path")
+      match = path.match(/.coffee$/)
+      compile(path) if match
+
+  # cofffescript compile
+  compile = (path) ->
+    fs.exists PATH_TO_COFFEE, (exists) ->
+      realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
+      noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
+
+  # export cloud9 plugin 
   module.exports = ext.register 'ext/coffeescript/coffeescript',
-    # Cloud9 
     name: 'InstantCoffee'
     dev: 'Lauris Vāvere'
     type: ext.GENERAL
     alone: yes
     hook: ->
-      console.log 'hook'
-      ide.addEventListener 'afterfilesave', @afterFileSave
+      ide.addEventListener 'afterfilesave', afterFileSave
     init: ->
     enable: ->
       enabled = yes
     disable: ->
       enabled = no
     destroy: ->
-      ide.removeEventListener 'afterfilesave', @afterFileSave
-    # Instant Coffee
-    afterFileSave: (e) ->
-      if enabled      
-        path = e.node.getAttribute("path")
-        match = path.match(/.coffee$/)
-        compile(path) if match
+      ide.removeEventListener 'afterfilesave', afterFileSave
 
 
 

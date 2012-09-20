@@ -14,7 +14,7 @@ define (require, exports, module) ->
   afterFileSave = (e) ->
     if enabled
       path = e.node.getAttribute("path")
-      match = path.match(/\/src\/[^/].coffee$/)
+      match = path.match(/\/src\/[^/]+\.coffee$/)
       compile(path) if match
 
   # cofffescript compile

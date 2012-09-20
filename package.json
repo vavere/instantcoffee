@@ -1,10 +1,9 @@
 {
-  "author": "",
-  "name": "coffeescript",
+  "name": "instantcoffee",
   "version": "0.0.1",
-  "main": "coffeescript.js",
+  "main": "instantcoffee.js",
   "plugin": {
-    "provides": ["ext.coffeescript"],
+    "provides": ["ext.instantcoffee"],
     "consumes": ["client-plugins"]
   }
 }

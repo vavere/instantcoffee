@@ -1,3 +1,7 @@
+# 20.09.2012
+# Lauris Vāvere
+# MA-1 Datori, SIA
+
 define (require, exports, module) ->
   
   ide = require 'core/ide'  

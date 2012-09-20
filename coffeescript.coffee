@@ -11,10 +11,11 @@ define (require, exports, module) ->
     dev: 'Lauris Vāvere'
     type: ext.GENERAL
     alone: yes
+
     hook: ->
+      console.log 'hook'
       ide.addEventListener 'afterfilesave', (e) ->
-        node = e.node
-        path = node.getAttribute("path")
+        path = e.node.getAttribute("path")
         match = path.match(/.coffee$/)
         if match
           compile(path)
@@ -24,13 +25,14 @@ define (require, exports, module) ->
         noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
 
     init: ->
-      
+      console.log 'init'
     show: ->
-      
+      console.log 'show'
     enable: ->
-        
+      console.log 'enable'
     disable: ->
-        
+      console.log 'disable'
     destroy: ->
+      console.log 'destroy'
 
 

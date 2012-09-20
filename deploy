@@ -1,8 +1,5 @@
-echo git pull
+set -x
+git clean -f
 git pull
-echo compile coffee
 coffee -cb *.coffee
-echo copy files
-cp instantcoffee.js ~/cloud9/plugins-client/ext.instantcoffee
-cp package.json ~/cloud9/plugins-client/ext.instantcoffee
-
+cp . ~/cloud9/plugins-client/ext.instantcoffee

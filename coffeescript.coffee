@@ -14,7 +14,7 @@ define (require, exports, module) ->
   afterFileSave = (e) ->
     if enabled
       path = e.node.getAttribute("path")
-      match = path.match(/.coffee$/)
+      match = path.match(/\/src\/[^/].coffee$/)
       compile(path) if match
 
   # cofffescript compile
@@ -23,7 +23,7 @@ define (require, exports, module) ->
     fs.exists virtualCoffee, (exists) ->
       if exists
         realPath = path.slice(ide.davPrefix.length + 1).replace("//", "/")
-        noderunner.run(PATH_TO_COFFEE,  ['-cb', realPath], false)
+        noderunner.run(PATH_TO_COFFEE,  ['-cbo', 'lib', realPath], false)
 
   # export cloud9 plugin 
   module.exports = ext.register 'ext/coffeescript/coffeescript',
